@@ -96,3 +96,4 @@
     </div>
 </div>
 @endsection
+{{-- http://larabbs.test/email/verify/4?expires=1558607019&signature=de658da7f727a586db81b9b4986fd77977a5b7b603b2813baba866497050239c --}}

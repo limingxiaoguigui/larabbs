@@ -9,6 +9,7 @@ class PagesController extends Controller
     //首页
     public function root()
     {
+
         return view('pages.root');
     }
 }

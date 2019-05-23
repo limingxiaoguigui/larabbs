@@ -75,6 +75,13 @@
                             @endif
                           </div>
                         </div>
+                        {{-- <div class="form-group row">
+                          <label for="Geetest" class="col-md-4 col-form-label text-md-right">智能验证码</label>
+                          <div class="col-md-6">
+                              {!! Geetest::render() !!}
+                          </div>
+                        </div> --}}
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

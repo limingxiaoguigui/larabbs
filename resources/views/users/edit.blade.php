@@ -10,7 +10,7 @@
         </h4>
       </div>
       <div class="card-body">
-      <form  action="{{route('users.update',$user->id)}}"  method="POST"  accept-charset="UTF-8">
+      <form  action="{{route('users.update',$user->id)}}"  method="POST"  accept-charset="UTF-8"  enctype="multipart/form-data">
         @method('patch')
         @csrf
          @include('shared._error')
@@ -27,6 +27,14 @@
           <textarea  name="introduction" id="introduction-field" class="form-control" rows="3">
             {{old('introduction',$user->introduction)}}
           </textarea>
+        </div>
+        <div  class="form-group  mb-4">
+          <label  for="" class="avatar-label">用户头像</label>
+          <input  type="file"  name="avatar"  class="form-control=file">
+          @if ($user->avatar)
+            <br>
+            <img  class="thumbnail img-responsive"  src="{{$user->avatar}}"  width="200">
+          @endif
         </div>
         <div  class="well well-sm">
           <button  type="submit"  class="btn btn-primary">保存</button>

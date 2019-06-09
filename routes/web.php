@@ -40,3 +40,5 @@ Route::patch('/users/{user}', 'UsersController@update')->name('users.update');
 Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
 //分类的资源路由
 Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
+//图片上传
+Route::post('upload_image', 'TopicController@uploadImage')->name('topics.upload_image');

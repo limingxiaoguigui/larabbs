@@ -12,28 +12,32 @@ use App\Handlers\ImageUploadHandler;
 
 class TopicsController extends Controller
 {
+    //初始化--控制用户登录的访问
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
+    //话题列表
     public function index(Request $request, Topic $topic)
     {
         $topics = $topic->withOrder($request->order)->paginate(20);
         return view('topics.index', compact('topics'));
     }
 
+    //话题详情页
     public function show(Topic $topic)
     {
         return view('topics.show', compact('topic'));
     }
 
+    //话题创建表单
     public function create(Topic $topic)
     {
         $categories = Category::all();
         return view('topics.create_and_edit', compact('topic', 'categories'));
     }
-
+    //话题创建
     public function store(TopicRequest $request, Topic $topic)
     {
         $topic->fill($request->all());
@@ -41,13 +45,13 @@ class TopicsController extends Controller
         $topic->save();
         return redirect()->route('topics.show', $topic->id)->with('success', '帖子创建成功！');
     }
-
+    //话题编辑页面
     public function edit(Topic $topic)
     {
         $this->authorize('update', $topic);
         return view('topics.create_and_edit', compact('topic'));
     }
-
+    //话题更新
     public function update(TopicRequest $request, Topic $topic)
     {
         $this->authorize('update', $topic);
@@ -55,7 +59,7 @@ class TopicsController extends Controller
 
         return redirect()->route('topics.show', $topic->id)->with('message', 'Updated successfully.');
     }
-
+    //话题删除
     public function destroy(Topic $topic)
     {
         $this->authorize('destroy', $topic);
@@ -63,6 +67,7 @@ class TopicsController extends Controller
 
         return redirect()->route('topics.index')->with('message', 'Deleted successfully.');
     }
+    //话题上传图片
     public function uploadImage(Request $request, ImageUploadHandler $uploader)
     {
         //初始化返回数据，默认是失败的

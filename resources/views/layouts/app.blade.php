@@ -7,6 +7,7 @@
   {{-- CSRF_TOKEN --}}
   <meta  name="csrf_token" content="{{csrf_token()}}">
   <title>@yield('title','Larabbs')--Laravel入门项目</title>
+  <meta name="description" content="@yield('description','Larabbs入门')"/>
   {{-- 样式 --}}
   <link href="{{mix('css/app.css')}}" rel="stylesheet">
   @yield('styles')

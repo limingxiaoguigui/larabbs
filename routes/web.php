@@ -37,8 +37,11 @@ Route::get('/users/{user}', 'UsersController@show')->name('users.show');
 Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit');
 Route::patch('/users/{user}', 'UsersController@update')->name('users.update');
 //话题的资源路由
-Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
 //分类的资源路由
 Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
 //图片上传
 Route::post('upload_image', 'TopicController@uploadImage')->name('topics.upload_image');
+
+//话题展示路由
+Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show');

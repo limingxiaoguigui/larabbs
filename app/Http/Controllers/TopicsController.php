@@ -10,6 +10,7 @@ use App\Models\Category;
 use Auth;
 use App\Handlers\ImageUploadHandler;
 use App\Models\User;
+use App\Models\link;
 
 class TopicsController extends Controller
 {
@@ -20,12 +21,13 @@ class TopicsController extends Controller
     }
 
     //话题列表
-    public function index(Request $request, Topic $topic, User  $user)
+    public function index(Request $request, Topic $topic, User  $user, Link $link)
     {
 
         $topics = $topic->withOrder($request->order)->paginate(20);
         $active_users = $user->getActiveUsers();
-        return view('topics.index', compact('topics', 'active_users'));
+        $links = $link->getAllCached();
+        return view('topics.index', compact('topics', 'active_users', 'links'));
     }
 
     //话题详情页

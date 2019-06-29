@@ -8,8 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Auth;
 use Spatie\Permission\Traits\HasRoles;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements MustVerifyEmailContract
+class User extends Authenticatable implements MustVerifyEmailContract, JWTSubject
 {
     use Notifiable {
     notify as  protected laravelNotify;
@@ -101,5 +102,16 @@ class User extends Authenticatable implements MustVerifyEmailContract
             $path = config('app.url') . "/uploads/images/avatars/$path";
         }
         $this->attributes['avatar'] = $path;
+    }
+
+    //获取用户ID
+    public  function  getJWTIdentifier()
+    {
+        return  $this->getKey();
+    }
+    //增加自定义内容
+    public  function  getJWTCustomClaims()
+    {
+        return  [];
     }
 }

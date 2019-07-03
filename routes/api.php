@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 $api = app('Dingo\Api\Routing\Router');
 
-$api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 'serializer:array'], function ($api) {
+$api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => ['serializer:array', 'bindings']], function ($api) {
 
     $api->group(['middleware' => 'api.throttle', 'limit' => config('api.rate_limits.sign.limit'), 'expires' => config('api.rate_limits.sign.expires')], function ($api) {
         //短信验证码
@@ -40,7 +40,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
     ], function ($api) {
 
         //游客可以访问的接口
-        $api->get('categories','CategoriesController@index')->name('api.categories.index');
+        $api->get('categories', 'CategoriesController@index')->name('api.categories.index');
 
         //需要token验证的接口
         $api->group(['middleware' => 'api.auth'], function ($api) {
@@ -51,7 +51,9 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             //图片资源
             $api->post('images', 'ImagesController@store')->name('api.images.store');
             //发布话题
-            $api->post('topics','TopicsController@store')->name('api.topics.store');
+            $api->post('topics', 'TopicsController@store')->name('api.topics.store');
+            //修改话题
+            $api->patch('topics/{topic}', 'TopicsController@update')->name('api.topics.update');
         });
     });
 });

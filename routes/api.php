@@ -61,6 +61,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             $api->patch('topics/{topic}', 'TopicsController@update')->name('api.topics.update');
             //删除话题
             $api->delete('topics/{topic}', 'TopicsController@destroy')->name('api.topics.destroy');
+            //发表回复
+            $api->post('topics/{topic}/replies', 'RepliesController@store')->name('api.topics.replies.store');
         });
     });
 });

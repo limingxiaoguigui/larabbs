@@ -70,7 +70,9 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             //删除回复
             $api->delete('topics/{topic}/replies/{reply}', 'RepliesController@destroy')->name('api.topics.replies.destroy');
             //通知列表
-            $api->get('user/notifications','NotificationsController@index')->name('api.user.notifications');
+            $api->get('user/notifications', 'NotificationsController@index')->name('api.user.notifications');
+            //通知统计
+            $api->get('user/notifications/stats', 'NotificationsController@stats')->name('api.user.notifications.stats');
         });
     });
 });

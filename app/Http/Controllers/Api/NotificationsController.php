@@ -22,4 +22,11 @@ class NotificationsController extends Controller
     {
         return  $this->response->array(['unread_count' => $this->user()->notification_count]);
     }
+    //标记消息为已读
+    public  function  read()
+    {
+        $this->user()->markAsRead();
+
+        return $this->response->noContent();
+    }
 }

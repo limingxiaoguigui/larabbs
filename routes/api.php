@@ -52,7 +52,9 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         //某个用户的回复列表
         $api->get('users/{user}/replies', 'RepliesController@userIndex')->name('api.users.replies.index');
         //资源推荐
-        $api->get('links','LinksController@index')->name('api.links.index');
+        $api->get('links', 'LinksController@index')->name('api.links.index');
+        //活跃用户
+        $api->get('actived/users', 'UsersController@activedIndex')->name('api.actived.users.index');
         //需要token验证的接口
         $api->group(['middleware' => 'api.auth'], function ($api) {
             //当前登录用的信息
@@ -78,8 +80,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             //标记消息通知为已读
             $api->patch('user/read/notifications', 'NotificationsController@read')->name('api.user.notifications.read');
             //当前登录用户的权限
-            $api->get('user/permissions','PermissionsController@index')->name('api.user.permissions.index');
-            
+            $api->get('user/permissions', 'PermissionsController@index')->name('api.user.permissions.index');
         });
     });
 });
